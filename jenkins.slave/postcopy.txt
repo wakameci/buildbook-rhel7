@@ -1,0 +1,1 @@
+guestroot/var/lib/jenkins/slave.jar /var/lib/jenkins/slave.jar mode=644 owner=jenkins group=jenkins
