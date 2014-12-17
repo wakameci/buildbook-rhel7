@@ -19,4 +19,7 @@ chroot $1 $SHELL -ex <<'EOS'
   chkconfig --list jenkins
   chkconfig jenkins off
   chkconfig --list jenkins
+
+  # make sure to change group/owner
+  chown -R jenkins:jenkins /var/lib/jenkins
 EOS
