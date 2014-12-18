@@ -4,6 +4,7 @@
 #  bash
 #
 set -e
+set -o pipefail
 
 declare abs_dirname=${BASH_SOURCE[0]%/*}/
 declare name=$1
@@ -34,6 +35,7 @@ cat <<'TEMPLATE' > xexecscript.d/${name}.sh
 #  bash
 #
 set -e
+set -o pipefail
 
 declare chroot_dir=$1
 

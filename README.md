@@ -43,6 +43,7 @@ untitled/xexecscript.d/untitled.sh is a sample execscript.
 #  bash
 #
 set -e
+set -o pipefail
 
 declare chroot_dir=$1
 
