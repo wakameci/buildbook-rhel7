@@ -4,6 +4,7 @@
 #  bash
 #
 set -e
+set -o pipefail
 
 # jenkins:x:498:497:Jenkins Continuous Build server:/var/lib/jenkins:/bin/bash
 # jenkins:x:497
