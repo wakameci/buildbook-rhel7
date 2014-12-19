@@ -56,7 +56,7 @@ Links
 -----
 
 + [vmbuider](https://github.com/hansode/vmbuilder)
-+ [buildbook-rhel6](https://github.com/hansode/buildbook-rhel6)
++ [buildbook-rhel7](https://github.com/wakameci/buildbook-rhel7)
 
 License
 -------
