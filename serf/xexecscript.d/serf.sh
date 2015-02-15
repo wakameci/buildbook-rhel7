@@ -15,7 +15,7 @@ chroot $1 $SHELL -ex <<'EOS'
   yum install --disablerepo=updates -y curl unzip
 EOS
 
-chroot $1 $SHELL <<'EOS'
+chroot $1 $SHELL -ex <<'EOS'
   # Download and install Serf
   cd /tmp
   case "$(arch)" in
