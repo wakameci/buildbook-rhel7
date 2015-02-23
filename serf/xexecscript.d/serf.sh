@@ -28,4 +28,5 @@ chroot $1 $SHELL -ex <<'EOS'
   done
   unzip serf.zip
   mv serf /usr/local/bin/serf
+  rm -f serf.zip
 EOS
