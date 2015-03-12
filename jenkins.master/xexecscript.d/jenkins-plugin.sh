@@ -22,22 +22,26 @@ chroot $1 $SHELL -ex <<'EOS'
     fi
     curl -fSkL ${base_url}/${version}/${name}.hpi -o /var/lib/jenkins/plugins/${name}.hpi
   done < <(cat <<-_EOS_ | egrep -v '^#|^$'
-	PrioritySorter 1.3
+	PrioritySorter
+	ci-skip
 	config-autorefresh-plugin
-	configurationslicing
 	config-file-provider
+	configurationslicing
 	cron_column
 	downstream-buildview
 	git        1.4.0
 	git-client 1.1.1
-	hipchat 0.1.5
+	github-api
+	github-oauth
 	greenballs
-	managed-scripts 1.1
+	hipchat
+	managed-scripts
 	nested-view
 	next-executions
-	parameterized-trigger 2.18
-	rebuild 1.20
-	timestamper 1.5.6
+	parameterized-trigger
+	rebuild
+	timestamper
+	throttle-concurrents
 	token-macro
 	urltrigger
 	view-job-filters
