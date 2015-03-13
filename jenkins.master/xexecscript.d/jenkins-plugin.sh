@@ -20,7 +20,8 @@ chroot $1 $SHELL -ex <<'EOS'
     else
       version=download/plugins/${name}/${version}
     fi
-    curl -fSkL ${base_url}/${version}/${name}.hpi -o /var/lib/jenkins/plugins/${name}.hpi
+    [[ -f /var/lib/jenkins/plugins/${name}.hpi ]] && continue
+    curl -fSkLR ${base_url}/${version}/${name}.hpi -o /var/lib/jenkins/plugins/${name}.hpi
   done < <(cat <<-_EOS_ | egrep -v '^#|^$'
 	PrioritySorter
 	ci-skip
