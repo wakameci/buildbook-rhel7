@@ -3,6 +3,13 @@
 # requires:
 #  bash
 #
+# usage:
+#  # run-book.sh <name>
+#  # run-book.sh <name> <name> <name> ...
+#
+#  # CHROOT_DIR=/               run-book.sh <name>
+#  # CHROOT_DIR=/path/to/chroot run-book.sh <name>
+#
 
 ### functions
 
@@ -75,37 +82,42 @@ function run_copies() {
   done
 }
 
+function run_book() {
+  local chroot_dir=$1 name=$2
+  [[ -d "${chroot_dir}" ]] || { echo "[ERROR] directory not found: ${chroot_dir} (${BASH_SOURCE[0]##*/}:${LINENO})" >&2; return 1; }
+  [[ -d "${name}" ]] || { echo "[ERROR] directory not found: ${name} (${BASH_SOURCE[0]##*/}:${LINENO})" >&2; return 1; }
+
+  local xexecscript="$(find -L ${name} ! -type d -perm -a=x         | sort)"
+  local        copy="$(find -L ${name} ! -type d -name copy.txt     | sort)"
+  local    postcopy="$(find -L ${name} ! -type d -name postcopy.txt | sort)"
+
+  cat <<-EOS | sed 's,^,# ,'
+	       copy: $(echo ${copy})
+	   postcopy: $(echo ${postcopy})
+	xexecscript: $(echo ${xexecscript})
+	EOS
+
+  run_copies       ${chroot_dir} ${copy}
+  run_xexecscripts ${chroot_dir} ${xexecscript}
+  run_copies       ${chroot_dir} ${postcopy}
+}
+
+function run_books() {
+  local chroot_dir=$1; shift
+  [[ -d "${chroot_dir}" ]] || { echo "[ERROR] directory not found: ${chroot_dir} (${BASH_SOURCE[0]##*/}:${LINENO})" >&2; return 1; }
+
+  while [[ $# -ne 0 ]]; do
+    run_book ${chroot_dir} $1
+    shift
+  done
+}
+
 ### main
 
 set -e
 set -o pipefail
 
 declare abs_dirname=${BASH_SOURCE[0]%/*}/
-declare name=$1
-declare chroot_dir=${2:-/}
-
-if [[ -z "${name}" ]]; then
-  cat <<-EOS >&2
-	USAGE
-	  $ run-book.sh <name> <chroot-dir>
-	EOS
-  exit 1
-fi
-
 cd ${abs_dirname}
 
-[[ -d ${name} ]]
-
-xexecscript="$(find -L ${name} ! -type d -perm -a=x | sort)"
-copy="$(find -L ${name} ! -type d -name copy.txt | sort)"
-postcopy="$(find -L ${name} ! -type d -name postcopy.txt | sort)"
-
-cat <<EOS | sed 's,^,# ,'
-       copy: $(echo ${copy})
-   postcopy: $(echo ${postcopy})
-xexecscript: $(echo ${xexecscript})
-EOS
-
-run_copies       ${chroot_dir} ${copy}
-run_xexecscripts ${chroot_dir} ${xexecscript}
-run_copies       ${chroot_dir} ${postcopy}
+run_books ${CHROOT_DIR:-"/"} "${@}"
