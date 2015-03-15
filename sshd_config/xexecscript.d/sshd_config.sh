@@ -8,6 +8,30 @@ set -o pipefail
 
 declare chroot_dir=$1
 
+function config_sshd_config() {
+  local sshd_config_path=$1 keyword=$2 value=$3
+  [[ -a "${sshd_config_path}" ]] || { echo "[ERROR] file not found: ${sshd_config_path} (${BASH_SOURCE[0]##*/}:${LINENO})" >&2; return 1; }
+  [[ -n "${keyword}" ]] || { echo "[ERROR] Invalid argument: keyword:${keyword} (${BASH_SOURCE[0]##*/}:${LINENO})" >&2; return 1; }
+  [[ -n "${value}"   ]] || { echo "[ERROR] Invalid argument: value:${value} (${BASH_SOURCE[0]##*/}:${LINENO})" >&2; return 1; }
+
+  egrep -q -w "^${keyword}" ${sshd_config_path} && {
+    # enabled
+    sed -i "s,^${keyword}.*,${keyword} ${value},"  ${sshd_config_path}
+  } || {
+    # commented parameter is "^#keyword value".
+    # therefore this case should *not* be included white spaces between # and keyword.
+    egrep -q -w "^#${keyword}" ${sshd_config_path} && {
+      # disabled
+      sed -i "s,^#${keyword}.*,${keyword} ${value}," ${sshd_config_path}
+    } || {
+      # no match
+      echo "${keyword} ${value}" >> ${sshd_config_path}
+    }
+  }
+
+  egrep -q -w "^${keyword} ${value}" ${sshd_config_path}
+}
+
 while read param value; do
   config_sshd_config ${chroot_dir}/etc/ssh/sshd_config ${param} ${value}
 done < <(cat <<-EOS | egrep -v '^#|^$'
