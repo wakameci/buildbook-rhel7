@@ -40,7 +40,7 @@ chroot $1 $SHELL -ex <<'EOS'
 	nested-view
 	next-executions
 	parameterized-trigger
-	rbenvrbenv
+	rbenv
 	rebuild
 	ruby-runtime
 	timestamper
