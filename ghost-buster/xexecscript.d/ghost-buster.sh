@@ -19,6 +19,12 @@ chroot $1 $SHELL -ex <<'EOS'
 
   case "${releasever}" in
     7.0.1406)
+      yum install -y \
+        glibc \
+        glibc-common \
+        glibc-devel \
+        glibc-headers
+
       yum update  -y \
         glibc \
         glibc-common \
