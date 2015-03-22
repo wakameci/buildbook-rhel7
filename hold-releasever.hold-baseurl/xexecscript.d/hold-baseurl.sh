@@ -15,7 +15,7 @@ function baseurl() {
 
   case "${releasever}" in
     7.0.1406 )
-      baseurl=http://ftp.riken.jp/Linux/centos
+      baseurl=http://ftp.jaist.ac.jp/pub/Linux/CentOS
       ;;
   esac
 
