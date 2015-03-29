@@ -3,6 +3,9 @@
 # requires:
 #  bash
 #
+# usage:
+#  # add-book.sh <book-name>
+#
 set -e
 set -o pipefail
 
