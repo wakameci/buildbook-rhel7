@@ -1,7 +1,7 @@
 Buildbook for RHEL7
 ===================
 
-xexecscript/copy.txt/postcopy.txt set for [vmbuilder](https://github.com/hansode/vmbuilder)
+xexecscript/copy.txt/postcopy.txt set for [kemumaki-box-rhel7](https://github.com/wakameci/kemumaki-box-rhel7) based on [vmbuilder](https://github.com/hansode/vmbuilder)
 
 Requirements
 ------------
@@ -17,7 +17,7 @@ Script will be called with the guest's chroot as first argument, so you can use 
 copy.txt/postcopy.txt
 ---------------------
 
-Read 'source dest' lines from FILE, copying  source  files  from host to dest in the guest's file system.
+Read `source dest` lines from FILE, copying source files from host to dest in the guest's file system.
 
 Getting Started
 ---------------
@@ -34,7 +34,7 @@ untitled/copy.txt
 untitled/guestroot
 ```
 
-untitled/xexecscript.d/untitled.sh is a sample execscript.
+`untitled/xexecscript.d/untitled.sh` is a sample execscript.
 
 ```
 #!/bin/bash
@@ -56,7 +56,8 @@ Links
 -----
 
 + [vmbuider](https://github.com/hansode/vmbuilder)
-+ [buildbook-rhel7](https://github.com/wakameci/buildbook-rhel7)
++ [kemumaki-box-rhel7](https://github.com/wakameci/kemumaki-box-rhel7)
++ [wakame-ci-cluster](https://github.com/wakameci/wakame-ci-cluster)
 
 License
 -------
