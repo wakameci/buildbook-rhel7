@@ -4,11 +4,11 @@
 #  bash
 #
 # usage:
-#  # run-book.sh <name>
-#  # run-book.sh <name> <name> <name> ...
+#  # run-book.sh <book-name>
+#  # run-book.sh <book-name> <book-name> <book-name> ...
 #
-#  # CHROOT_DIR=/               run-book.sh <name>
-#  # CHROOT_DIR=/path/to/chroot run-book.sh <name>
+#  # CHROOT_DIR=/               run-book.sh <book-name>
+#  # CHROOT_DIR=/path/to/chroot run-book.sh <book-name>
 #
 
 ### functions
