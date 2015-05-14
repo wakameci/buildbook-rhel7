@@ -58,4 +58,4 @@ function configure_sudo_requiretty() {
   esac
 }
 
-configure_sudo_requiretty $1 1
+configure_sudo_requiretty $1 0
