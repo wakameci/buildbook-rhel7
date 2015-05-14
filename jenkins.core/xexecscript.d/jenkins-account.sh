@@ -34,6 +34,13 @@ function configure_sudo_sudoers() {
 
 configure_sudo_sudoers $1 jenkins NOPASSWD:
 
+function check_sudo_requiretty() {
+  local sudoers_path=$1
+  [[ -a "${sudoers_path}" ]] || { echo "[ERROR] file not found: ${sudoers_path} (${BASH_SOURCE[0]##*/}:${LINENO})" >&2; return 1; }
+
+  egrep "^Defaults.+requiretty" ${sudoers_path} -q
+}
+
 function configure_sudo_requiretty() {
   local chroot_dir=$1 requiretty=${2:-${sudo_requiretty}}
   [[ -a "${chroot_dir}/etc/sudoers" ]] || { echo "[WARN] file not found: ${chroot_dir}/etc/sudoers (${BASH_SOURCE[0]##*/}:${LINENO})" >&2; return 0; }
