@@ -13,7 +13,7 @@ chroot $1 $SHELL -ex <<'EOS'
     exit 0
   fi
 
-  until curl -fSkL -o /tmp/dot.rbenv.tar.gz http://dlc.wakame.axsh.jp/wakameci/kemumaki-box-rhel7/current/dot.rbenv.tar.gz; do
+  until curl -fSkL -o /tmp/dot.rbenv.tar.gz http://dlc2.wakame.axsh.jp/wakameci/kemumaki-box-rhel7/current/dot.rbenv.tar.gz; do
     sleep 1
   done
   tar zxf /tmp/dot.rbenv.tar.gz -C /var/lib/jenkins/
