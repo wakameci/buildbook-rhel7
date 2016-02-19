@@ -20,8 +20,8 @@ chroot $1 $SHELL -ex <<'EOS'
     i*86) arch=386   ;;
   esac
 
-  until curl -fsSkL -o consul.zip https://dl.bintray.com/mitchellh/consul/0.5.0_linux_${arch}.zip; do
-    sleep 1
+  until curl -fsSkL -o consul.zip https://releases.hashicorp.com/consul/0.5.0/consul_0.5.0_linux_${arch}.zip; do
+    sleep 60
   done
   unzip consul.zip
   mv consul /usr/local/bin/consul

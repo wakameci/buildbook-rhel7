@@ -23,8 +23,8 @@ chroot $1 $SHELL -ex <<'EOS'
     i*86) arch=386   ;;
   esac
 
-  until curl -fsSkL -o serf.zip https://dl.bintray.com/mitchellh/serf/0.6.4_linux_${arch}.zip; do
-    sleep 1
+  until curl -fsSkL -o serf.zip https://releases.hashicorp.com/serf/0.6.4/serf_0.6.4_linux_${arch}.zip; do
+    sleep 60
   done
   unzip serf.zip
   mv serf /usr/local/bin/serf
