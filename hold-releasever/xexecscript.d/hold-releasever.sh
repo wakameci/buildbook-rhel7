@@ -22,6 +22,6 @@ fi
 if [[ -n "${distro_ver}" ]]; then
   mkdir -p             ${chroot_dir}/etc/yum/vars
 
-  echo ${distro_ver} > ${chroot_dir}/etc/yum/vars/releasever
-  cat                  ${chroot_dir}/etc/yum/vars/releasever
+  echo ${distro_ver%%.*} > ${chroot_dir}/etc/yum/vars/releasever
+  cat                      ${chroot_dir}/etc/yum/vars/releasever
 fi
